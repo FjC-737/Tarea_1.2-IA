@@ -69,3 +69,29 @@ print(cant)
 conteo = df_clima.groupby('Ciudad')['Fecha'].count()
 print(conteo.sum())
 
+df = pd.read_csv('calificaciones.csv')
+
+print(df.head())
+
+
+promedios = df.groupby('Materia')['Calificación'].mean()
+print("\nPromedio de calificaciones por materia:")
+print(promedios)
+
+promedios_estudiantes = df.groupby('Estudiante')['Calificación'].mean()
+
+mejor_est= promedios_estudiantes.idxmax()
+
+print("\nMejor estudiante:")
+print(mejor_est)
+
+superiores_85 = (promedios > 85).sum()
+print(f"Número de estudiantes con promedio superior a 85: {superiores_85}")
+
+materia_mas_frecuente = df['Materia'].value_counts().idxmax()
+
+print(f"La materia con más calificaciones registradas es: {materia_mas_frecuente}")
+
+promedios_ordenados = promedios.sort_values()
+print("Los 5 estudiantes con el promedio más bajo son:")
+print(promedios_ordenados.head(5))
